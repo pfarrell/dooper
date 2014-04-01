@@ -6,9 +6,8 @@ class WebHCat
   attr_accessor :user
 
   def initialize(opts={})
-    @user = user
-    uri = opts["url"] || ENV["WEBHCAT_URL"]
-    user opts["user"] || ENV["WEBHCAT_USER"]
+    uri  = opts[:url] || ENV["WEBHCAT_URL"]
+    @user = opts[:user] || ENV["WEBHCAT_USER"]
     self.class.base_uri uri
   end
 
@@ -46,7 +45,4 @@ class WebHCat
     return resp.has_key?("partitioned") ? resp["totalFileSize"] : nil
   end
 
-  def jobs
-    return self.class.get("/templeton/v1/jobs?user.name=#{@user}&showall=true")
-  end
 end

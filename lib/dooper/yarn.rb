@@ -5,7 +5,7 @@ class Yarn
   include HTTParty
 
   def initialize(opts={})
-    uri = opts["uri"] || ENV["YARN_URL"]
+    uri = opts[:url] || ENV["YARN_URL"]
     self.class.base_uri "#{uri}/ws/v1"
   end
 
