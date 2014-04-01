@@ -1,7 +1,7 @@
 require 'httparty'
 require 'byebug'
 
-class Hive
+class WebHCat
   include HTTParty
   attr_accessor :user
 
