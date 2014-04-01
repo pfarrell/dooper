@@ -15,7 +15,9 @@ Exposes some objects that allow simple interaction with S3, WebHcat, and HDFS
   * AMAZON_ACCESS_KEY_ID
   * AWS_REGION
   * WEBHCAT_URL
-  * 
+  * WEBHCAT_USER
+  * YARN_URL
+
 ## Usage
 
 TODO: Write usage instructions here
