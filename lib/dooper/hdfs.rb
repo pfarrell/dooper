@@ -31,14 +31,3 @@ class HDFS
     each(path) {|file| yield file if file.type == "DIRECTORY"}
   end
 end
-
-#hdfs = HDFS.new
-#
-#hdfs.host = "master01.fire.hdp.rgops.com"
-#hdfs.port = 50070
-#
-#path = ARGV[0].nil? ? "/" : ARGV[0]
-#
-#hdfs.each_file(path) do |file| 
-#  puts file.pathSuffix
-#end

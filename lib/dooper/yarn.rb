@@ -1,10 +1,11 @@
 require 'httparty'
+require 'byebug'
 
 class Yarn
   include HTTParty
-  base_uri "master01.fire.hdp.rgops.com:8088/ws/v1"
 
-  def initialize
+  def initialize(uri)
+    self.class.base_uri "#{uri}/ws/v1"
   end
 
   def build_path(resource, opts)

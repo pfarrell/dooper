@@ -4,10 +4,12 @@ require 'byebug'
 class Hive
   include HTTParty
   attr_accessor :user
-  base_uri "master02.fire.hdp.rgops.com:50111"
 
-  def initialize
-    @user = 'pfarrell'
+  def initialize(opts={})
+    @user = user
+    uri = opts["url"] || ENV["WEBHCAT_URL"]
+    user opts["user"] || ENV["WEBHCAT_USER"]
+    self.class.base_uri uri
   end
 
   def is_exception?(resp)
