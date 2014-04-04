@@ -1,6 +1,6 @@
 # Dooper
 
-Exposes some objects that allow simple interaction with S3, WebHcat, and HDFS
+Exposes some objects that allow simple interaction with S3, WebHcat, HDFS, and YARN
 
 ## Installation
 
