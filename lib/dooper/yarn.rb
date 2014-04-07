@@ -1,5 +1,4 @@
 require 'httparty'
-require 'byebug'
 
 class Yarn
   include HTTParty
