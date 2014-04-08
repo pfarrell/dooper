@@ -14,9 +14,11 @@ Exposes some objects that allow simple interaction with S3, WebHcat, HDFS, and Y
   * AMAZON_SECRET_ACCESS_KEY
   * AMAZON_ACCESS_KEY_ID
   * AWS_REGION
-  * WEBHCAT_URL
+  * WEBHCAT_URL (defaults to localhost:50111)
   * WEBHCAT_USER
-  * YARN_URL
+  * YARN_URL  (defaults to localhost:8088)
+  * HDFS_HOST (defaults to localhost)
+  * HDFS_PORT (defaults to 50070)
 
 ## Usage
 
