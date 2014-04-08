@@ -5,8 +5,8 @@ class HDFS
   attr_accessor :host, :port
 
   def initialize(opts={})
-    @host = opts["host"] || ENV["HDFS_HOST"] || "localhost"
-    @port = opts["port"] || ENV["HDFS_PORT"] || 50070
+    @host = opts[:host] || ENV["HDFS_HOST"] || "localhost"
+    @port = opts[:port] || ENV["HDFS_PORT"] || 50070
   end
 
   def client
