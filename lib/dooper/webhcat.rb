@@ -5,7 +5,7 @@ class WebHCat
   attr_accessor :user
 
   def initialize(opts={})
-    uri  = opts[:url] || ENV["WEBHCAT_URL"]
+    uri  = opts[:url] || ENV["WEBHCAT_URL"] || "localhost:50111"
     @user = opts[:user] || ENV["WEBHCAT_USER"]
     self.class.base_uri uri
   end
