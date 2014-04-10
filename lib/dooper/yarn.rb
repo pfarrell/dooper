@@ -15,16 +15,19 @@ class Yarn
 
   def resp(resource, key, opts)
     path = build_path(resource, opts)
-    resp = self.class.get(path)
-    return resp[key] if resp.has_key? key
+    self.class.get(path)[key]
   end
 
   def cluster_info(opts={})
-    return resp("cluster", "clusterInfo", opts)
+    resp("cluster", "clusterInfo", opts)
   end
 
   def cluster_metrics(opts={})
-    return resp("cluster/metrics", "clusterMetrics", opts)
+    resp("cluster/metrics", "clusterMetrics", opts)
+  end
+
+  def cluster_scheduler(opt={})
+    resp("cluster/scheduler", "clusterScheduler", opts)
   end
 
   def applications(opts={})
