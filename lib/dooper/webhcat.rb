@@ -16,7 +16,7 @@ class WebHCat
   end
 
   def status
-    return self.class.get("/templeton/v1/status?user.name=#{@user}")
+    return self.class.get("/templeton/v1/status?user.name=#{@user}").parsed_response
   end
 
   def databases
