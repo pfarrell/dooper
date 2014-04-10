@@ -1,38 +1,12 @@
-require 'webhdfs'
-require 'ostruct'
+require 'httparty'
 
-class HDFS
-  attr_accessor :host, :port
+class WebHDFS
+  include HTTParty
 
   def initialize(opts={})
-    @host = opts[:host] || ENV["HDFS_HOST"] || "localhost"
-    @port = opts[:port] || ENV["HDFS_PORT"] || 50070
+    uri = opts[:url] || ENV["WEBHDFS_URL"] || "localhost:50070"
+    self.class.base_uri uri
   end
 
-  def client
-    return WebHDFS::Client.new(@host, @port)
-  end
-
-  def exists?(path)
-    return !list(path).nil?
-  end
-
-  def list(path)
-    begin
-      return client.list(path)
-    rescue WebHDFS::FileNotFoundError
-    end
-  end
-
-  def each(path)
-    client.list(path).each{|file| yield OpenStruct.new(file)}
-  end
-
-  def each_file(path)
-    each(path) {|file| yield file if file.type == "FILE"}
-  end
-
-  def each_dir(path)
-    each(path) {|file| yield file if file.type == "DIRECTORY"}
-  end
+  
 end
