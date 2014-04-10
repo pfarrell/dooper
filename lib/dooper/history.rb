@@ -5,20 +5,18 @@ class History
   include HTTParty
 
   def initialize(opts={})
-    byebug
-    uri = opts[:url] || ENV["HISTORY_URL"]
+    uri = opts[:url] || ENV["HISTORY_URL"] || "localhost:19888"
     self.class.base_uri "#{uri}/ws/v1"
   end
 
   def build_path(resource, opts)
     params = opts.map {|k,v| "#{k}=#{v}"}.join("&")
-    "/#{resource}?#{params}"
+    "#{resource}?#{params}"
   end
 
   def resp(resource, key, opts)
     path = build_path(resource, opts)
-    resp = self.class.get(path)
-    resp[key] if resp.has_key? key
+    self.class.get(path)[key]
   end
 
   def history_info(opts={})
