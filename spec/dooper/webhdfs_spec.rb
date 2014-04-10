@@ -14,25 +14,28 @@ describe WebHDFS do
   context "#home_directory" do
     it "can retrieve home directory" do
       home_dir = {"Path"=>"/user/dr.who"}
-      stub_request(:get, "http://testapi/webhdfs/v1?op=GETHOMEDIRECTORY").
-        to_return(:status => 200, :body => home_dir.to_json, :headers => {'Content-Type' => 'application/json'})
-      expect(WebHDFS.new(url: "testapi").home_directory).to eq(home_dir["Path"])
+      setup!("http://testapi/webhdfs/v1?op=GETHOMEDIRECTORY", home_dir)
+      expect(hdfs.home_directory).to eq(home_dir["Path"])
     end
 
     it "can retrieve home directory" do
       home_dir = {"Path"=>"/user/pfarrell"}
-      stub_request(:get, "http://testapi/webhdfs/v1?user.name=pfarrell&op=GETHOMEDIRECTORY").
-        to_return(:status => 200, :body => home_dir.to_json, :headers => {'Content-Type' => 'application/json'})
+      setup!("http://testapi/webhdfs/v1?user.name=pfarrell&op=GETHOMEDIRECTORY", home_dir)
       expect(WebHDFS.new(url: "testapi", user: "pfarrell").home_directory).to eq(home_dir["Path"])
     end
   end
 
   context "#list" do
     it "can retrieve files and directories on a path" do
-      stub_request(:get, "http://testapi/webhdfs/v1/user/pfarrell?op=LISTSTATUS").
-        to_return(:status => 200, :body => dir.to_json, :headers => {'Content-Type' => 'application/json'})
+      setup!("http://testapi/webhdfs/v1/user/pfarrell?op=LISTSTATUS", dir)
       expect(hdfs.list("/user/pfarrell")).to eq(dir["FileStatuses"]["FileStatus"])
     end
   end
 
+  context "#dirs" do
+  end
+
+  context "#files" do
+  end
+  
 end
