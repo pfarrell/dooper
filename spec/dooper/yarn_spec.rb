@@ -36,4 +36,13 @@ describe Yarn do
       expect(yarn.cluster_nodes).to eq(nodes["nodes"]["node"])
     end
   end
+
+  context "#node" do
+    let(:node) {{"node"=>{"rack"=>"/default-rack", "state"=>"RUNNING", "id"=>"data02.example.com:45454", "nodeHostName"=>"data02.example.com", "nodeHTTPAddress"=>"data02.example.com:8042", "lastHealthUpdate"=>1397193568528, "healthReport"=>"", "numContainers"=>11, "usedMemoryMB"=>75264, "availMemoryMB"=>39424}}}
+    let(:node_id) {"data02.example.com:45454"}
+    it "can get info about a node" do
+      setup!("http://testapi/ws/v1/cluster/nodes/#{node_id}", node)
+      expect(yarn.cluster_node(node_id)).to eq(node["node"])
+    end
+  end
 end

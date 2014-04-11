@@ -42,4 +42,8 @@ class Yarn
   def cluster_nodes(opts={})
     resp("cluster/nodes", "nodes", opts)["node"]
   end
+
+  def cluster_node(node_id, opts={})
+    resp("cluster/nodes/#{node_id}", "node", opts)
+  end
 end
