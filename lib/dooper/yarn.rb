@@ -30,12 +30,16 @@ class Yarn
     resp("cluster/scheduler", "clusterScheduler", opts)
   end
 
-  def applications(opts={})
-    rsp = resp("cluster/apps", "apps", opts)
-    return rsp["app"] if rsp.has_key? "app"
+  def cluster_applications(opts={})
+    apps = resp("cluster/apps", "apps", opts)
+    apps.nil? ? [] : apps["app"]
   end
 
-  def application(application_id, opts={})
-    return resp("cluster/apps/#{application_id}", "app", opts)
+  def cluster_application(application_id, opts={})
+    resp("cluster/apps/#{application_id}", "app", opts)
+  end
+
+  def cluster_nodes(opts={})
+    resp("cluster/nodes", "nodes", opts)["node"]
   end
 end

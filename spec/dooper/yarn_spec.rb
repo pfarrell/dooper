@@ -19,4 +19,21 @@ describe Yarn do
       expect(yarn.cluster_metrics).to eq(cluster_metrics["clusterMetrics"])
     end
   end
+
+  context "#cluster_application" do
+    let(:application) {{"app"=>{"id"=>"application_1396980920850_0152", "user"=>"ayang", "name"=>"select params['player_params%5Bvideo%5D...10(Stage-1)", "queue"=>"default", "state"=>"FINISHED", "finalStatus"=>"SUCCEEDED", "progress"=>100.0, "trackingUI"=>"History", "trackingUrl"=>"http://master01.example.com:8088/proxy/application_1396980920850_0152/jobhistory/job/job_1396980920850_0152", "diagnostics"=>"", "clusterId"=>1396980920850, "applicationType"=>"MAPREDUCE", "startedTime"=>1396989015822, "finishedTime"=>1396989043999, "elapsedTime"=>28177, "amContainerLogs"=>"http://data03.example.com:8042/node/containerlogs/container_1396980920850_0152_01_000001/ayang", "amHostHttpAddress"=>"data03.example.com:8042"}}}
+    let(:app_id) {"application_1396980920850_0152"}
+    it "can retrieve single applications" do
+      setup!("http://testapi/ws/v1/cluster/apps/#{app_id}", application)
+      expect(yarn.cluster_application(app_id)).to eq(application["app"])
+    end
+  end
+
+  context "#nodes" do
+    let(:nodes) {{"nodes"=>{"node"=>[{"rack"=>"/default-rack", "state"=>"RUNNING", "id"=>"data03.example.com:45454", "nodeHostName"=>"data03.example.com", "nodeHTTPAddress"=>"data03.example.com:8042", "lastHealthUpdate"=>1397192437429, "healthReport"=>"", "numContainers"=>0, "usedMemoryMB"=>0, "availMemoryMB"=>114688}, {"rack"=>"/default-rack", "state"=>"RUNNING", "id"=>"data01.example.com:45454", "nodeHostName"=>"data01.example.com", "nodeHTTPAddress"=>"data01.example.com:8042", "lastHealthUpdate"=>1397192435475, "healthReport"=>"", "numContainers"=>0, "usedMemoryMB"=>0, "availMemoryMB"=>114688}, {"rack"=>"/default-rack", "state"=>"RUNNING", "id"=>"data05.example.com:45454", "nodeHostName"=>"data05.example.com", "nodeHTTPAddress"=>"data05.example.com:8042", "lastHealthUpdate"=>1397192431062, "healthReport"=>"", "numContainers"=>2, "usedMemoryMB"=>7168, "availMemoryMB"=>107520}, {"rack"=>"/default-rack", "state"=>"RUNNING", "id"=>"data04.example.com:45454", "nodeHostName"=>"data04.example.com", "nodeHTTPAddress"=>"data04.example.com:8042", "lastHealthUpdate"=>1397192433927, "healthReport"=>"", "numContainers"=>1, "usedMemoryMB"=>3584, "availMemoryMB"=>111104}, {"rack"=>"/default-rack", "state"=>"RUNNING", "id"=>"data02.example.com:45454", "nodeHostName"=>"data02.example.com", "nodeHTTPAddress"=>"data02.example.com:8042", "lastHealthUpdate"=>1397192488529, "healthReport"=>"", "numContainers"=>2, "usedMemoryMB"=>7168, "availMemoryMB"=>107520}]}}}
+    it "can get info about cluster nodes" do
+      setup!("http://testapi/ws/v1/cluster/nodes", nodes)
+      expect(yarn.cluster_nodes).to eq(nodes["nodes"]["node"])
+    end
+  end
 end
