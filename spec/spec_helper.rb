@@ -1,12 +1,17 @@
 require 'dooper'
 require 'byebug'
 require 'webmock/rspec'
+require 'simplecov'
 
 module SetupHelper
   def setup!(endpoint, fixture)
     stub_request(:get, endpoint).
       to_return(:status => 200, :body => fixture.to_json, :headers => {'Content-Type' => 'application/json'})
   end
+end
+
+SimpleCov.start do
+  add_filter "/vendor/"
 end
 
 RSpec.configure do |config|
@@ -17,3 +22,5 @@ RSpec.configure do |config|
   config.include WebMock::API
   config.include SetupHelper
 end
+
+
