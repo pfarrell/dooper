@@ -1,5 +1,3 @@
-require 'dooper'
-require 'byebug'
 require 'webmock/rspec'
 require 'simplecov'
 
@@ -12,6 +10,7 @@ end
 
 SimpleCov.start do
   add_filter "/vendor/"
+  add_filter "/spec/"
 end
 
 RSpec.configure do |config|
@@ -24,3 +23,5 @@ RSpec.configure do |config|
 end
 
 
+require 'dooper'
+require 'byebug'
